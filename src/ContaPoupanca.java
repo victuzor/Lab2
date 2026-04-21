@@ -6,11 +6,36 @@ public abstract class ContaPoupanca extends Conta{
 
     @Override
     public boolean sacar(double valor) {
-        return false;
+        if (valor <= 0) {
+            System.out.println("Valor inválido. Tente novamente.");
+            return false;
+        }
+
+        if (saldo >= valor) {
+            saldo = saldo - valor;
+            System.out.println("Saque realizado.");
+            return true;
+        } else {
+            System.out.println("Não foi possível realizar o saque. Saldo Insuficiente.");
+            return false;
+        }
     }
 
     @Override
     public boolean transferir(Conta alvo, double valor) {
-        return false;
+
+        if (alvo == null) {
+            System.out.println("Transferência inválida.");
+            return false;
+        }
+
+        if (sacar(valor)) {
+            alvo.depositar(valor);
+            System.out.println("Transferência bem sucedida.");
+            return true;
+        } else {
+            System.out.println("Transferência mal sucedida.");
+            return false;
+        }
     }
 }
