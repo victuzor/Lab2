@@ -21,4 +21,16 @@ public abstract class Conta {
         return saldo;
     }
 
+    public void depositar(double valor) {
+        if (valor > 0) {
+            saldo = saldo + valor;
+            System.out.println("Depósito realizado.");
+        } else {
+            System.out.println("Não foi possível realizar o depósito");
+        }
+    }
+
+    public abstract boolean sacar (double valor);
+
+    public abstract boolean transferir(Conta alvo, double valor);
 }
