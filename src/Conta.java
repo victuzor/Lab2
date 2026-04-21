@@ -33,4 +33,11 @@ public abstract class Conta {
     public abstract boolean sacar (double valor);
 
     public abstract boolean transferir(Conta alvo, double valor);
+
+    public void exibir() {
+        System.out.println("Dados da Conta:");
+        System.out.println(" - Numero: " + numero);
+        System.out.println(" - Cliente: " + cliente);
+        System.out.println(" - Saldo: " + saldo);
+    }
 }

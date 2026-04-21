@@ -28,7 +28,6 @@ public abstract class ContaPoupanca extends Conta{
             System.out.println("Transferência inválida.");
             return false;
         }
-
         if (sacar(valor)) {
             alvo.depositar(valor);
             System.out.println("Transferência bem sucedida.");
@@ -37,5 +36,12 @@ public abstract class ContaPoupanca extends Conta{
             System.out.println("Transferência mal sucedida.");
             return false;
         }
+    }
+    @Override
+    public void exibir() {
+        System.out.println("Conta Poupanca:");
+        System.out.println(" - Numero: " + numero);
+        System.out.println(" - Cliente: " + cliente);
+        System.out.println(" - Saldo: " + saldo);
     }
 }

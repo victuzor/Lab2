@@ -1,15 +1,15 @@
-public abstract class ContaCorrente extends Conta implements ITributavel{
+public abstract class ContaCorrente extends Conta implements ITributavel {
     public ContaCorrente(int numero, String cliente) {
         super(numero, cliente);
     }
 
     @Override
-    public double calcularTributos() {
-        return 0;
+    public double calculaTributos() {
+        return saldo * 0.01;
     }
 
     @Override
-    public boolean sacar (double valor) {
+    public boolean sacar(double valor) {
         if (valor <= 0) {
             System.out.println("Valor inválido. Tente novamente.");
             return false;
@@ -31,6 +31,26 @@ public abstract class ContaCorrente extends Conta implements ITributavel{
 
     @Override
     public boolean transferir(Conta alvo, double valor) {
-        return false;
+        if (alvo == null) {
+            System.out.println("Transferência inválida.");
+            return false;
+        }
+
+        if (sacar(valor)) {
+            alvo.depositar(valor);
+            System.out.println("Transferência bem sucedida.");
+            return true;
+        } else {
+            System.out.println("Transferência mal sucedida.");
+            return false;
+        }
+    }
+    @Override
+    public void exibir() {
+        System.out.println("Conta Corrente:");
+        System.out.println(" - Numero: " + numero);
+        System.out.println(" - Cliente: " + cliente);
+        System.out.println(" - Saldo: " + saldo);
     }
 }
+
