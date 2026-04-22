@@ -1,4 +1,4 @@
-public abstract class ContaCorrente extends Conta implements ITributavel {
+public class ContaCorrente extends Conta implements ITributavel {
     public ContaCorrente(int numero, String cliente) {
         super(numero, cliente);
     }

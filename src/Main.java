@@ -39,8 +39,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        ArrayList<Conta> contas = new ArrayList<>();
+        ArrayList<Conta> listaDeContas = new ArrayList<>();
 
+        int codigoConta = 1001;
         int resposta;
 
         do {
@@ -57,9 +58,55 @@ public class Main {
             resposta = scanner.nextInt();
 
             switch(resposta) {
-                
+
+                case 1:
+                    scanner.nextLine();
+                    System.out.println("Nome: ");
+                    String nome = scanner.nextLine();
+
+                    System.out.println("Tipo de Conta: 1 - Corrente / 2 - Poupança");
+                    int tipoConta = scanner.nextInt();
+
+                    if (tipoConta == 1) {
+                        listaDeContas.add(new ContaCorrente(codigoConta, nome));
+                        System.out.println("Conta Corrente" + codigoConta + "criada com sucesso ");
+                    } else if (tipoConta == 2) {
+                        listaDeContas.add(new ContaPoupanca(codigoConta, nome));
+                        System.out.println("Conta Poupança" + codigoConta + "criada com sucesso ");
+                    } else {
+                        System.out.println("Valor Inválido.");
+                        break;
+                    }
+                    codigoConta++;
+                    break;
+
+                case 2:
+                    listarContas(listaDeContas);
+                    break;
+
+                case 3:
+                    // implementar saque
+
+                case 4:
+                    // implementar deposito
+
+                case 5:
+                    // implementar transferencia
+
+                case 6:
+                    calcularTributos(listaDeContas);
+                    break;
+
+                case 7:
+                    System.out.println("Finalizando Chamado...");
+                    break;
+
+                default:
+                    System.out.println("Valor Inválido.");
             }
 
         } while (resposta != 7);
+
+        scanner.close();
     }
 }

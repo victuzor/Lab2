@@ -1,4 +1,4 @@
-public abstract class ContaPoupanca extends Conta{
+public class ContaPoupanca extends Conta{
 
     public ContaPoupanca(int numero, String cliente) {
         super(numero, cliente);
