@@ -21,21 +21,18 @@ public class Main {
             }
         }
     }
-        public static void calcularTributos(ArrayList <Conta> listaDeContas) {
-            double total = 0;
-
-            for (Conta conta : listaDeContas) {
-                if (conta instanceof ITributavel) {
-                    ITributavel contaTributavel = (ITributavel) conta;
-
-                    total += contaTributavel.calculaTributos();
-                }
+    public static void calcularTributos(ArrayList <Conta> listaDeContas) {
+        double total = 0;
+        for (Conta conta : listaDeContas) {
+            if (conta instanceof ITributavel) {
+                ITributavel contaTributavel = (ITributavel) conta;
+                total += contaTributavel.calculaTributos();
             }
-            System.out.println("\n========================================");
-            System.out.println("Total de tributos a recolher: R$ " + total);
-            System.out.println("========================================");
         }
-
+        System.out.println("\n========================================");
+        System.out.println("Total de tributos a recolher: R$ " + total);
+        System.out.println("========================================");
+    }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -69,10 +66,10 @@ public class Main {
 
                     if (tipoConta == 1) {
                         listaDeContas.add(new ContaCorrente(codigoConta, nome));
-                        System.out.println("Conta Corrente" + codigoConta + "criada com sucesso ");
+                        System.out.println("Conta Corrente " + codigoConta + " criada com sucesso ");
                     } else if (tipoConta == 2) {
                         listaDeContas.add(new ContaPoupanca(codigoConta, nome));
-                        System.out.println("Conta Poupança" + codigoConta + "criada com sucesso ");
+                        System.out.println("Conta Poupança " + codigoConta + " criada com sucesso ");
                     } else {
                         System.out.println("Valor Inválido.");
                         break;
@@ -85,13 +82,54 @@ public class Main {
                     break;
 
                 case 3:
-                    // implementar saque
+                    System.out.println("Digite o número da conta: ");
+                    int numContaSaque = scanner.nextInt();
+                    System.out.println("Digite o valor a ser sacado: ");
+                    double valorSaque = scanner.nextDouble();
+
+                    Conta contaSaque = buscarConta(listaDeContas, numContaSaque);
+                    if (contaSaque != null) {
+                        if (contaSaque.sacar(valorSaque) == false) {
+                            System.out.println("Não foi possível realizar o saque. Saldo Insuficiente.");
+                        }
+                    } else {
+                        System.out.println("Conta não encontrada.");
+                    }
+                    break;
 
                 case 4:
-                    // implementar deposito
+                    System.out.println("Digite o número da conta: ");
+                    int numContaDeposito = scanner.nextInt();
+                    System.out.println("Digite o valor a ser depositado: ");
+                    double valorDeposito = scanner.nextDouble();
+
+                    Conta contaDeposito = buscarConta(listaDeContas, numContaDeposito);
+                    if (contaDeposito != null) {
+                        contaDeposito.depositar(valorDeposito);
+                    } else {
+                        System.out.println("Conta não encontrada.");
+                    }
+                    break;
 
                 case 5:
-                    // implementar transferencia
+                    System.out.println("Digite o número da conta origem: ");
+                    int numContaOrigem = scanner.nextInt();
+                    System.out.println("Digite o número da conta alvo: ");
+                    int numContaAlvo = scanner.nextInt();
+                    System.out.println("Digite o valor a ser transferido: ");
+                    double valorTransferido = scanner.nextDouble();
+
+                    Conta contaOrigem = buscarConta(listaDeContas, numContaOrigem);
+                    Conta contaAlvo = buscarConta(listaDeContas, numContaAlvo);
+
+                    if (contaOrigem != null && contaAlvo != null) {
+                        if (contaOrigem.transferir(contaAlvo, valorTransferido) == false) {
+                            System.out.println("Houve um erro. Tente novamente");
+                        }
+                    } else {
+                        System.out.println("Conta não encontrada.");
+                    }
+                    break;
 
                 case 6:
                     calcularTributos(listaDeContas);
